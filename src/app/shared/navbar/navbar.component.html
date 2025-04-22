@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+    <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/">E-Commerce</a>
+
+        <div class="d-flex align-items-center ms-auto">
+            <div *ngIf="user" class="text-white me-3">
+                <i class="bi bi-person-circle me-1"></i>
+                {{ user.name }}
+            </div>
+
+            <a class="btn position-relative me-3" routerLink="/orders">
+                <i class="bi bi-clock-history text-white fs-5"></i>
+            </a>
+
+            <a class="btn position-relative me-3" routerLink="/cart">
+                <i class="bi bi-cart-fill text-white fs-5"></i>
+                <span *ngIf="cartCount > 0"
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{ cartCount }}
+                </span>
+            </a>
+
+            <button class="btn btn-outline-light btn-sm" (click)="logout()">Cerrar sesión</button>
+        </div>
+    </div>
+</nav>

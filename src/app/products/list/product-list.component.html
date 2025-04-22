@@ -1,0 +1,60 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2>📦 Gestión de productos</h2>
+      <button class="btn btn-secondary ms-auto me-2" (click)="goModeCatalog()">
+        <i class="bi bi-eye me-1"></i>Ver modo catalogo
+      </button>
+      <button class="btn btn-primary" (click)="openModalForCreate()">
+        <i class="bi bi-plus-circle me-1"></i> Nuevo producto
+      </button>
+    </div>
+
+    <!-- Modal Bootstrap -->
+    <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              {{ selectedProduct ? 'Editar producto' : 'Agregar producto' }}
+            </h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <app-product-save
+              [initialData]="selectedProduct"
+              (saved)="onProductSaved($event)"
+            ></app-product-save>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <table class="table table-bordered table-striped mt-4 align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Stock</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ product.name }}</td>
+          <td>$ {{ product.price | number: '1.2-2' }}</td>
+          <td>{{ product.stock }}</td>
+          <td>
+            <button class="btn btn-sm btn-warning me-2" (click)="openModalForEdit(product)">
+              <i class="bi bi-pencil-square"></i>
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="delete(product.id)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

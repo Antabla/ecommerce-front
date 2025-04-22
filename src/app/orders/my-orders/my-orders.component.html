@@ -1,0 +1,40 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+    <h2 class="mb-4">📜 Mis órdenes</h2>
+
+    <div *ngIf="orders.length > 0; else noOrders">
+        <div *ngFor="let order of orders" class="card mb-4 shadow-sm">
+            <div class="card-header d-flex justify-content-between">
+                <span><strong>Orden #{{ order.id }}</strong></span>
+                <small class="text-muted">{{ order.createdAt | date: 'medium' }}</small>
+            </div>
+            <div class="card-body">
+                <table class="table table-sm align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>ID Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio unitario</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of order.items">
+                            <td>{{ item.productId }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>$ {{ item.price | number: '1.2-2' }}</td>
+                            <td>$ {{ item.price * item.quantity | number: '1.2-2' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-end fw-bold">
+                    Total: $ {{ order.totalAmount | number: '1.2-2' }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-template #noOrders>
+        <div class="alert alert-info text-center">Aún no has realizado ninguna compra.</div>
+    </ng-template>
+</div>

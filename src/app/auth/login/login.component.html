@@ -1,0 +1,33 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card p-4 shadow-sm" style="min-width: 320px; max-width: 400px; width: 100%;">
+        <h3 class="text-center mb-4">Iniciar sesión</h3>
+
+        <form (ngSubmit)="login()" #form="ngForm">
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo electrónico</label>
+                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email" required
+                    autofocus />
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="password" name="password" [(ngModel)]="password"
+                    required />
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100" [disabled]="form.invalid">
+                Ingresar
+            </button>
+
+            <div *ngIf="error" class="alert alert-danger mt-3">
+                {{ error }}
+            </div>
+        </form>
+
+        <div class="text-center mt-3">
+            <small>¿No tienes cuenta?
+                <a routerLink="/auth/register">Regístrate</a>
+            </small>
+        </div>
+    </div>
+</div>
